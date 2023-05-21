@@ -121,17 +121,13 @@ class _FavSongUIState extends State<FavSongUI> {
                             onPressed: () {
                               
 
-                              if(index > 0){
+                            
                                 controller.playSong(
-                                    widget.songs[index]
+                                    widget.songs[controller.playerIndex.value - 1]
                                         .uri,
                                     controller.playerIndex.value - 1);
-                                    index--;
-                                    if(index < 0){
-                                      index++;
-                                    }
-                                    print('this is index $index');
-                              }
+                                    
+                              
                               
                             },
                             icon: const Icon(
@@ -159,17 +155,11 @@ class _FavSongUIState extends State<FavSongUI> {
                         IconButton(
                             onPressed: () {
                               
-                              if(index <=widget.songs.length - 1){
                                  controller.playSong(
-                                    widget.songs[index]
+                                    widget.songs[controller.playerIndex.value + 1]
                                         .uri,
                                     controller.playerIndex.value + 1);
-                                    index++;
-                                    if(index > max){
-                                      index --;
-                                    }
-                                    print('this is index $index');
-                              }
+                                    
                              
                             },
                             icon: const Icon(Icons.skip_next_rounded,
