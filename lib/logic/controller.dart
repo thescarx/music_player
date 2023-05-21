@@ -46,7 +46,7 @@ class PlayerController extends GetxController {
       value.value = event.inSeconds.toDouble();
     });
   }
-  void showNotification() async {
+  void showNotification(str) async {
     const AndroidNotificationDetails androidPlatformChannelSpecifics =
     AndroidNotificationDetails(
       'channel_id',
@@ -61,7 +61,7 @@ class PlayerController extends GetxController {
     await flutterLocalNotificationsPlugin.show(
       0,
       'Music Notification',
-      'Music is playing',
+      '$str is playing',
       platformChannelSpecifics,
     );
   }
@@ -82,12 +82,12 @@ class PlayerController extends GetxController {
     audioPlayer.seek(duration);
   }
 
-  playSong(String? uri, index) {
+  playSong(String? uri, index,str) {
     playerIndex.value = index;
     try {
       audioPlayer.setAudioSource(AudioSource.uri(Uri.parse(uri!)));
       audioPlayer.play();
-      _createNotification(uri);
+      showNotification(str);
       isPlaying(true);
       updatePosition();
     } catch (e) {
@@ -115,25 +115,6 @@ class PlayerController extends GetxController {
     }
   }
 
-  Future<void> _createNotification(uri) async {
-    final AndroidNotificationDetails androidPlatformChannelSpecifics =
-    AndroidNotificationDetails(
-      'channel_id',
-      'channel_name',
-      importance: Importance.max,
-      priority: Priority.high,
-    );
-
-    final NotificationDetails platformChannelSpecifics =
-    NotificationDetails(android: androidPlatformChannelSpecifics);
-
-    await flutterLocalNotificationsPlugin.show(
-      0,
-      'Music Notification',
-      uri,
-      platformChannelSpecifics,
-    );
-  }
 
 
 

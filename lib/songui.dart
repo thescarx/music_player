@@ -129,7 +129,9 @@ class _SongUIState extends State<SongUI> {
                                 controller.playSong(
                                     widget
                                         .Song[controller.playerIndex.value].uri,
-                                    controller.playerIndex.value - 1);
+                                    controller.playerIndex.value - 1,widget
+                                    .Song[controller.playerIndex.value]
+                                    .title);
                               },
                               icon: const Icon(
                                 Icons.skip_previous_rounded,
@@ -141,10 +143,7 @@ class _SongUIState extends State<SongUI> {
                                 onPressed: () {
                                   if (controller.isPlaying.value) {
                                     controller.audioPlayer.pause();
-                                    AudioServiceBackground.setState(
-                                      controls: [MediaControl.play, MediaControl.stop],
-                                      playing: false,
-                                    );
+
                                     controller.isPlaying(false);
                                   } else {
                                     controller.audioPlayer.play();
@@ -162,7 +161,9 @@ class _SongUIState extends State<SongUI> {
                                 controller.playSong(
                                     widget
                                         .Song[controller.playerIndex.value].uri,
-                                    controller.playerIndex.value + 1);
+                                    controller.playerIndex.value + 1,widget
+                                    .Song[controller.playerIndex.value]
+                                    .title);
                               },
                               icon: const Icon(Icons.skip_next_rounded,
                                   color: Colors.white, size: 28)),

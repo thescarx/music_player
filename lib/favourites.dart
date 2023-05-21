@@ -79,7 +79,7 @@ class _FavouritesState extends State<Favourites> {
                           Get.to(() => FavSongUI(songs: favsongs),
                               transition: Transition.downToUp);
                           print("this is the url ${favsongs[index].uri}");
-                          controller.playSong(favsongs[index].uri, index);
+                          controller.playSong(favsongs[index].uri, index,favsongs[index].name);
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -137,7 +137,7 @@ class _FavouritesState extends State<Favourites> {
                                       });
                                       print('play');
                                       controller.playSong(
-                                          favsongs[index].uri, index);
+                                          favsongs[index].uri, index,favsongs[index].name);
                                     },
                                     icon: const Icon(
                                       Icons.play_arrow,

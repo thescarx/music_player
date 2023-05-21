@@ -125,7 +125,7 @@ class _HomeState extends State<Home> {
                                 print(
                                     "this is the url ${snapshot.data![index].uri}");
                                 controller.playSong(
-                                    snapshot.data![index].uri, index);
+                                    snapshot.data![index].uri, index,snapshot.data![index].displayNameWOExt);
                               },
                               child: Container(
                                 decoration: BoxDecoration(
@@ -186,7 +186,7 @@ class _HomeState extends State<Home> {
                                             print('play');
                                             controller.playSong(
                                                 snapshot.data![index].uri,
-                                                index);
+                                                index,snapshot.data![index].displayNameWOExt);
                                           },
                                           icon: const Icon(
                                             Icons.play_arrow,

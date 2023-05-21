@@ -125,7 +125,9 @@ class _FavSongUIState extends State<FavSongUI> {
                                 controller.playSong(
                                     widget.songs[controller.playerIndex.value - 1]
                                         .uri,
-                                    controller.playerIndex.value - 1);
+                                    controller.playerIndex.value - 1,widget
+                                    .songs[controller.playerIndex.value]
+                                    .title);
                                     
                               
                               
@@ -158,7 +160,9 @@ class _FavSongUIState extends State<FavSongUI> {
                                  controller.playSong(
                                     widget.songs[controller.playerIndex.value + 1]
                                         .uri,
-                                    controller.playerIndex.value + 1);
+                                    controller.playerIndex.value + 1,widget
+                                     .songs[controller.playerIndex.value]
+                                     .title);
                                     
                              
                             },
