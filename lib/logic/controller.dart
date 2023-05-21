@@ -11,6 +11,9 @@ import 'db.dart';
 class PlayerController extends GetxController {
   final audioQuery = OnAudioQuery();
   final audioPlayer = AudioPlayer();
+
+    
+
   var playerIndex = 0.obs;
   var isPlaying = false.obs;
 
@@ -90,6 +93,11 @@ class PlayerController extends GetxController {
     } catch (e) {
       print(e.toString());
     }
+  }
+
+  playDownloadedSong(url){
+    audioPlayer.setAudioSource(AudioSource.uri(Uri.parse(url!)));
+    audioPlayer.play();
   }
 
   @override

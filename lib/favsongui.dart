@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:music_player/logic/controller.dart';
@@ -15,8 +17,11 @@ class FavSongUI extends StatefulWidget {
 
 class _FavSongUIState extends State<FavSongUI> {
   var controller = Get.find<PlayerController>();
+  int index = 0;
+
   @override
   Widget build(BuildContext context) {
+    int max = widget.songs.length;
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
@@ -115,9 +120,15 @@ class _FavSongUIState extends State<FavSongUI> {
                         IconButton(
                             onPressed: () {
                               
-                              controller.playSong(
-                                  widget.songs[controller.playerIndex.value].uri,
-                                  controller.playerIndex.value - 1);
+
+                            
+                                controller.playSong(
+                                    widget.songs[controller.playerIndex.value - 1]
+                                        .uri,
+                                    controller.playerIndex.value - 1);
+                                    
+                              
+                              
                             },
                             icon: const Icon(
                               Icons.skip_previous_rounded,
@@ -143,59 +154,16 @@ class _FavSongUIState extends State<FavSongUI> {
                         ),
                         IconButton(
                             onPressed: () {
-                              controller.playSong(
-                                  widget.songs[controller.playerIndex.value].uri,
-                                  controller.playerIndex.value + 1);
+                              
+                                 controller.playSong(
+                                    widget.songs[controller.playerIndex.value + 1]
+                                        .uri,
+                                    controller.playerIndex.value + 1);
+                                    
+                             
                             },
                             icon: const Icon(Icons.skip_next_rounded,
                                 color: Colors.white, size: 28)),
-                        // Obx(
-                        //   () => IconButton(
-                        //       onPressed: () async {
-                        //         controller.switchFav();
-                        //         if (controller.isFav.value) {
-                        //           Song song = Song(
-                        //               title: widget
-                        //                   .songs[controller.playerIndex.value]
-                        //                   .title,
-                        //               name: widget
-                        //                   .Song[controller.playerIndex.value]
-                        //                   .displayNameWOExt,
-                        //               artist: widget
-                        //                   .Song[controller.playerIndex.value]
-                        //                   .artist!,
-                        //               id: widget
-                        //                   .Song[controller.playerIndex.value]
-                        //                   .id,
-                        //               uri: widget
-                        //                   .Song[controller.playerIndex.value]
-                        //                   .uri!);
-                        //           await controller.favDb.addFavorite(song);
-                        //           Fluttertoast.showToast(
-                        //               msg: 'Added to favourite');
-                        //           print(song.artist);
-                        //           print(song.title);
-                        //           print(song.name);
-                        //           print(song.id);
-                        //           print(song.uri);
-                        //         } else {
-                        //           await controller.favDb.removeFavorite(widget
-                        //               .Song[controller.playerIndex.value].id);
-                        //           Fluttertoast.showToast(
-                        //               msg: 'Removed from favourite');
-                        //         }
-                        //       },
-                        //       icon: controller.isFav.value
-                        //           ? Icon(
-                        //               Icons.favorite,
-                        //               size: 28,
-                        //               color: Colors.red,
-                        //             )
-                        //           : Icon(
-                        //               Icons.favorite_border_outlined,
-                        //               size: 28,
-                        //             )),
-                        // )
                       ],
                     ),
                   ],
