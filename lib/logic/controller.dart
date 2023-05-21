@@ -1,14 +1,16 @@
+import 'package:audio_service/audio_service.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
+import '../main.dart';
 import 'db.dart';
 
 class PlayerController extends GetxController {
   final audioQuery = OnAudioQuery();
   final audioPlayer = AudioPlayer();
-
   var playerIndex = 0.obs;
   var isPlaying = false.obs;
 
@@ -41,6 +43,27 @@ class PlayerController extends GetxController {
       value.value = event.inSeconds.toDouble();
     });
   }
+  void showNotification() async {
+    const AndroidNotificationDetails androidPlatformChannelSpecifics =
+    AndroidNotificationDetails(
+      'channel_id',
+      'channel_name',
+      importance: Importance.max,
+      priority: Priority.high,
+    );
+
+    const NotificationDetails platformChannelSpecifics =
+    NotificationDetails(android: androidPlatformChannelSpecifics);
+
+    await flutterLocalNotificationsPlugin.show(
+      0,
+      'Music Notification',
+      'Music is playing',
+      platformChannelSpecifics,
+    );
+  }
+
+
 
   // pauseSong(String? uri){
   //   try {
@@ -61,6 +84,7 @@ class PlayerController extends GetxController {
     try {
       audioPlayer.setAudioSource(AudioSource.uri(Uri.parse(uri!)));
       audioPlayer.play();
+      _createNotification(uri);
       isPlaying(true);
       updatePosition();
     } catch (e) {
@@ -82,4 +106,28 @@ class PlayerController extends GetxController {
       checkPermission();
     }
   }
+
+  Future<void> _createNotification(uri) async {
+    final AndroidNotificationDetails androidPlatformChannelSpecifics =
+    AndroidNotificationDetails(
+      'channel_id',
+      'channel_name',
+      importance: Importance.max,
+      priority: Priority.high,
+    );
+
+    final NotificationDetails platformChannelSpecifics =
+    NotificationDetails(android: androidPlatformChannelSpecifics);
+
+    await flutterLocalNotificationsPlugin.show(
+      0,
+      'Music Notification',
+      uri,
+      platformChannelSpecifics,
+    );
+  }
+
+
+
 }
+

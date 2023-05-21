@@ -41,6 +41,8 @@ dependencies:
   sqflite: ^2.2.8+4
   fluttertoast: ^8.2.1
   flutter_file_downloader: ^1.1.2
+  audio_service: ^0.18.9
+  flutter_local_notifications: ^14.1.0
 
 dev_dependencies:
   flutter_test:

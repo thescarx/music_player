@@ -1,3 +1,4 @@
+import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -140,6 +141,10 @@ class _SongUIState extends State<SongUI> {
                                 onPressed: () {
                                   if (controller.isPlaying.value) {
                                     controller.audioPlayer.pause();
+                                    AudioServiceBackground.setState(
+                                      controls: [MediaControl.play, MediaControl.stop],
+                                      playing: false,
+                                    );
                                     controller.isPlaying(false);
                                   } else {
                                     controller.audioPlayer.play();
